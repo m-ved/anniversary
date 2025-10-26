@@ -60,6 +60,38 @@
             margin: 20px 0;
         }
 
+        .password-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            font-size: 1.3em;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            margin: 30px auto;
+            text-align: center;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .hint {
+            font-size: 1.2em;
+            color: #666;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 1.1em;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
         .question-text {
             font-size: 1.5em;
             line-height: 1.8;
@@ -244,8 +276,33 @@
     </style>
 </head>
 <body>
+    <!-- Password Screen -->
+    <div class="section" id="passwordScreen">
+        <div class="container">
+            <div class="heart">🔐</div>
+            <h1>For Roshni 💕</h1>
+            <p class="invitation-text">
+                This is a special page made just for you...
+                <br><br>
+                But first, answer this:
+            </p>
+            <p class="hint">What do you say to me every morning? 💭</p>
+            <input 
+                type="text" 
+                id="passwordInput" 
+                class="password-input" 
+                placeholder="Enter your answer..."
+                onkeypress="handlePasswordEnter(event)"
+            >
+            <div id="errorMessage" class="error-message hidden">
+                Hmm, that's not quite right... Try again! 💕
+            </div>
+            <button class="button" onclick="checkPassword()">Enter ✨</button>
+        </div>
+    </div>
+
     <!-- Question Screen -->
-    <div class="section" id="questionScreen">
+    <div class="section hidden" id="questionScreen">
         <div class="container">
             <div class="heart">❤️</div>
             <h1>Hey Roshni...</h1>
@@ -314,35 +371,31 @@
         </div>
     </div>
 
-    <!-- Itinerary Section -->
+    <!-- First Date Story Section -->
     <div class="section hidden" id="itinerarySection">
         <div class="container">
-            <h2>Our Special Day 💕</h2>
-            <p class="invitation-text">Here's what I have planned for us...</p>
+            <h2>Where It All Began ☕</h2>
+            <div class="date-highlight" style="font-size: 1.3em;">October 9, 2024</div>
+            <p class="invitation-text" style="font-size: 1.4em; color: #764ba2; font-weight: bold;">
+                Starbucks Reserve
+            </p>
             
-            <div class="itinerary">
-                <div class="itinerary-item">
-                    <div class="time">🌅 Morning - 10:00 AM</div>
-                    <div class="activity">Start the day with breakfast at your favorite café</div>
-                </div>
-                
-                <div class="itinerary-item">
-                    <div class="time">☀️ Afternoon - 1:00 PM</div>
-                    <div class="activity">A surprise activity that I know you'll love</div>
-                </div>
-                
-                <div class="itinerary-item">
-                    <div class="time">🌆 Evening - 6:00 PM</div>
-                    <div class="activity">Romantic dinner at a special place</div>
-                </div>
-                
-                <div class="itinerary-item">
-                    <div class="time">🌙 Night - 9:00 PM</div>
-                    <div class="activity">End the night under the stars, just you and me</div>
-                </div>
+            <div class="message-box" style="text-align: left; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                <p style="margin-bottom: 20px;">
+                    I still remember that day like it was yesterday. It was my first date ever, and honestly, I had no idea what I was doing. My heart was racing, my palms were probably sweaty, and I was just hoping I wouldn't mess everything up.
+                </p>
+                <p style="margin-bottom: 20px;">
+                    But somehow, sitting there with you at Starbucks Reserve, everything just felt... right. Your smile made all my nervousness fade away, even if just for moments at a time.
+                </p>
+                <p style="margin-bottom: 20px;">
+                    And then came the walk from the Bean to your dorm. That walk... that magical walk. When our hands touched, when our fingers intertwined, I swear my heart was going to explode out of my chest. I was trying so hard to play it cool, to calm my racing heart, but inside I was the happiest nervous wreck ever.
+                </p>
+                <p style="margin-bottom: 0;">
+                    That was the moment I knew. That was the moment everything changed. That was the beginning of us. 💕
+                </p>
             </div>
 
-            <div class="scroll-hint">↓ Keep scrolling for our memories ↓</div>
+            <div class="scroll-hint">↓ Keep scrolling for more memories ↓</div>
         </div>
     </div>
 
@@ -369,6 +422,28 @@
     </div>
 
     <script>
+        // Password check
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            const correctPassword = 'i love you';
+            
+            if (input.toLowerCase().trim() === correctPassword) {
+                document.getElementById('passwordScreen').classList.add('hidden');
+                document.getElementById('questionScreen').classList.remove('hidden');
+                document.getElementById('errorMessage').classList.add('hidden');
+            } else {
+                document.getElementById('errorMessage').classList.remove('hidden');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function handlePasswordEnter(event) {
+            if (event.key === 'Enter') {
+                checkPassword();
+            }
+        }
+
         // Countdown timer
         function updateCountdown() {
             const anniversary = new Date('2025-10-29');
@@ -396,7 +471,6 @@
             document.getElementById('rejectionScreen').classList.remove('hidden');
             
             if (noClickCount >= 2) {
-                // After clicking no twice, force to celebration
                 setTimeout(() => {
                     handleYes();
                 }, 2000);
@@ -415,7 +489,6 @@
             document.getElementById('itinerarySection').classList.remove('hidden');
             document.getElementById('memoriesSection').classList.remove('hidden');
             
-            // Smooth scroll to anniversary section
             document.getElementById('anniversarySection').scrollIntoView({ behavior: 'smooth' });
         }
 
