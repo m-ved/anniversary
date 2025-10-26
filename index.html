@@ -190,23 +190,37 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
             margin: 40px 0;
         }
 
-        .photo-placeholder {
-            background: linear-gradient(135deg, #e0e7ff, #f3e8ff);
+        .photo-item {
+            background: white;
             border-radius: 15px;
-            padding: 60px 20px;
-            text-align: center;
-            color: #764ba2;
-            font-style: italic;
-            transition: transform 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .photo-placeholder:hover {
-            transform: scale(1.05);
+        .photo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .photo-caption {
+            padding: 15px;
+            text-align: center;
+            color: #764ba2;
+            font-weight: bold;
+            font-size: 1.1em;
         }
 
         .countdown {
@@ -353,7 +367,7 @@
                 Get ready for an amazing day together...
             </p>
             <button class="button" onclick="showItinerary()" style="margin-top: 40px;">
-                Show Me The Plans! 💕
+                Let's Relive Our Story! 💕
             </button>
         </div>
     </div>
@@ -367,7 +381,6 @@
             <p class="invitation-text">
                 Here's to 365 days of us, and to thousands more ahead!
             </p>
-            <div class="scroll-hint">↓ Scroll to see what I have planned ↓</div>
         </div>
     </div>
 
@@ -406,12 +419,30 @@
             <p class="invitation-text">A year full of beautiful moments...</p>
             
             <div class="gallery">
-                <div class="photo-placeholder">Our First Photo Together</div>
-                <div class="photo-placeholder">That Amazing Trip</div>
-                <div class="photo-placeholder">Laughing Together</div>
-                <div class="photo-placeholder">A Random Tuesday</div>
-                <div class="photo-placeholder">Your Beautiful Smile</div>
-                <div class="photo-placeholder">Our Favorite Memory</div>
+                <div class="photo-item">
+                    <img src="First Picture Together.jpg" alt="First Picture Together">
+                    <div class="photo-caption">First Picture Together</div>
+                </div>
+                <div class="photo-item">
+                    <img src="First Holi Together.jpg" alt="First Holi Together">
+                    <div class="photo-caption">First Holi Together</div>
+                </div>
+                <div class="photo-item">
+                    <img src="First Valentine.jpg" alt="First Valentine">
+                    <div class="photo-caption">First Valentine's Day</div>
+                </div>
+                <div class="photo-item">
+                    <img src="First Ramen Date.jpg" alt="First Ramen Date">
+                    <div class="photo-caption">First Ramen Date</div>
+                </div>
+                <div class="photo-item">
+                    <img src="First Pumpkin Carving.jpg" alt="First Pumpkin Carving">
+                    <div class="photo-caption">First Pumpkin Carving</div>
+                </div>
+                <div class="photo-item">
+                    <img src="First Winter Together.jpg" alt="First Winter Together">
+                    <div class="photo-caption">First Winter Together</div>
+                </div>
             </div>
 
             <div class="message-box">
